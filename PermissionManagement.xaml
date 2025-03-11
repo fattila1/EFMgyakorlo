@@ -1,0 +1,22 @@
+﻿<Window x:Class="EFM.PermissionManagement"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Permission Management" Height="400" Width="600">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="UserList" Grid.Column="0" Margin="10" SelectionChanged="UserList_SelectionChanged">
+            <!-- Felhasználók listája -->
+        </ListBox>
+        <StackPanel Grid.Column="1" Margin="10">
+            <TextBlock Text="Jogosultságok" FontWeight="Bold" Margin="0,0,0,10"/>
+            <ListBox x:Name="PermissionList" Margin="0,0,0,10">
+                <!-- Felhasználóhoz tartozó jogosultságok -->
+            </ListBox>
+            <Button Content="Jogosultság Hozzáadása" Click="AddPermission_Click" Margin="0,5,0,0"/>
+            <Button Content="Jogosultság Eltávolítása" Click="RemovePermission_Click" Margin="0,5,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>

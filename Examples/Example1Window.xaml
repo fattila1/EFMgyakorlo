@@ -1,0 +1,145 @@
+﻿<Window x:Class="EFM.Examples.Example1Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Example 1 - Weighted Score Method" Height="700" Width="700">
+    <Window.Resources>
+        <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#F0F0F0" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="CenterTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14">
+                <Run Text="Súlyozott pontszám módszerek" FontWeight="Bold" />
+                <LineBreak/><LineBreak/>
+                Az általunk tárgyalt módszerek közül talán a legegyszerűbb, és biztosan a leguniverzálisabb a súlyozott pontszám módszere. Amellett, hogy a döntések széles spektruma esetén jól alkalmazható (a létesítményelhelyezés mellett alkalmazzák például a beszállítók értékelésére is), nagy előnye, hogy a vizsgálandó szempontok száma nem korlátos, és a súlyoknak köszönhetően azok prioritását is meghatározhatjuk. 
+                A telephelyválasztást akkor tudja segíteni, ha egy önálló, független telephelyet keresünk, azaz vagy nincs más működő egységünk, vagy a döntésünket nem befolyásolja a már működő egységeink elhelyezkedése. Feltételezi, hogy a telephelyválasztásra már alternatívákat találtunk, és az előttünk álló feladat az, hogy azok közül kiválasszuk a megfelelőt.
+                <LineBreak/><LineBreak/>
+                A súlyozott pontszám módszer lépései:
+                <LineBreak/>
+                1. A döntési szempontrendszer kialakítása
+                <LineBreak/>
+                2. A szempontok fontosságának meghatározása (súlyok rendelése a szempontokhoz)
+                <LineBreak/>
+                3. Az egyes alternatívák értékelése a szempontok szerint:
+                <LineBreak/>
+                a. Jellemzően 5-ös vagy 10-es skálák mentén, számszerű értékkel értékelünk, de bizonyos esetekben előfordulhat szöveges értékelés is, melyet számadatokká szükséges konvertálni.
+                <LineBreak/>
+                b. Előfordulhat, hogy a kiválasztott szempontok egy részének csak egymáshoz viszonyított helyzete határozható meg, ekkor arányosítással konvertáljuk az értékeket a skála szerinti értékekké.
+                <LineBreak/>
+                4. Súlyozott pontértékek számítása:
+                <LineBreak/>
+                a. Az additív modell formulája/képlete:
+                <LineBreak/>
+                Sj = Σ (Wi * Fij)
+                <LineBreak/>
+                ahol:
+                <LineBreak/>
+                Sj = j hely összpontszáma
+                <LineBreak/>
+                Wi = i tényező súlya
+                <LineBreak/>
+                Fij = i tényező pontértéke j helyen
+                <LineBreak/>
+                m = tényezők száma
+                <LineBreak/>
+                b. A multiplikatív modell képlete:
+                <LineBreak/>
+                Sj = Π (Fij^Wi)
+                <LineBreak/>
+                5. Súlyozott pontértékek összehasonlítása, döntés.
+            </TextBlock>
+
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14">
+                <Run Text="Mintafeladat: Súlyozott pontszám módszerek" FontWeight="Bold" />
+                <LineBreak/><LineBreak/>
+                Egy vállalkozás házi jellegű sajtok készítésével foglalkozik, a tevékenységéhez az alapanyagként szolgáló tejet saját állatállománya biztosítja. A jó minőségnek köszönhetően növekszik a kereslet a termékei iránt, azonban nem tudja növelni a kibocsátást a jelenlegi telephelyen, nincs lehetőség bővítésre, ezért új telephely kialakítására van szükség. Hosszas keresés után két olyan eladó ingatlant találtak, mely elhelyezkedésének és méretének köszönhetően alkalmas lehet a tevékenység folytatására. Súlyozott pontszám módszerrel határozza meg, hogy a kettő közül melyik telephelyet érdemes választani!
+                <LineBreak/>
+                A vállalkozás tulajdonosai az alábbi szempontokat tartják fontosnak a telephely kiválasztásakor (a szempont fontosságát a zárójelben található súlyok jelzik):
+                <LineBreak/>
+                • a telek mérete (2),
+                <LineBreak/>
+                • a meglévő épületek mérete (4),
+                <LineBreak/>
+                • a meglévő épületek állapota (4),
+                <LineBreak/>
+                • távolság a belvárosi piactól (2),
+                <LineBreak/>
+                • az ingatlan ára (5),
+                <LineBreak/>
+                • a telephely megközelíthetősége (3).
+            </TextBlock>
+
+            <DataGrid x:Name="DataGrid1" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True"
+                    Margin="10" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Szempontok" Binding="{Binding Szempont}" Width="2*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Padding" Value="5"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="1. telephely" Binding="{Binding Telephely1}" Width="*" ElementStyle="{StaticResource CenterTextBlockStyle}" />
+                    <DataGridTextColumn Header="2. telephely" Binding="{Binding Telephely2}" Width="*" ElementStyle="{StaticResource CenterTextBlockStyle}" />
+                    <DataGridTextColumn Header="Súly" Binding="{Binding Suly}" Width="*" ElementStyle="{StaticResource CenterTextBlockStyle}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14">
+                A táblázatban található értékek igen sokfélék. Ahhoz, hogy tovább tudjunk velük számolni, összehasonlíthatóvá kell őket konvertálni. 
+                <LineBreak/>
+                A példában az értékeléshez használjuk a 10-es skálát, vagyis minden adatot konvertáljunk át 1 és 10 közötti számértékké. 
+                A szöveges válaszok esetén ez az alábbiak szerint történhet: kiváló – 10; jó – 8; közepes – 6; gyenge – 4; rossz – 2.
+                <LineBreak/>
+                Abban az esetben, ha a kiválasztott szempontok egy részének csak egymáshoz viszonyított helyzete határozható meg, 
+                akkor arányosítással konvertáljuk az értékeket a skála szerinti értékekké. 
+                Ilyenkor a számunkra kedvezőbb (több választási lehetőség esetén a legkedvezőbb) adatot jutalmazzuk 10-es, maximális értékkel.
+                Például a telek mérete esetén a nagyobb méret (2200 m2) ér 10-et, és arányosítva a kisebb 9-et.
+                Az 1. telephely telekméretéhez tartozó pontérték: 2200 m2/10*2000 m2=9
+            </TextBlock>
+            <DataGrid x:Name="DataGrid2" AutoGenerateColumns="False" HeadersVisibility="Column" IsReadOnly="True"
+         Margin="10" ColumnHeaderStyle="{StaticResource ColumnHeaderStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Szempontok" Binding="{Binding Szempont}" Width="2*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                                <Setter Property="Padding" Value="5"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="1. telephely" Binding="{Binding Telephely1}" Width="*" ElementStyle="{StaticResource CenterTextBlockStyle}" />
+                    <DataGridTextColumn Header="2. telephely" Binding="{Binding Telephely2}" Width="*" ElementStyle="{StaticResource CenterTextBlockStyle}" />
+                    <DataGridTextColumn Header="Súly" Binding="{Binding Suly}" Width="*" ElementStyle="{StaticResource CenterTextBlockStyle}" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <TextBlock TextWrapping="Wrap" Margin="5" FontSize="14">
+                Behelyettesítve az additív modell formulájába/képletébe:
+                <LineBreak/>
+                Az 1. telephely összpontszáma: S1=2*9+4*10+4*6+2*6+5*10+3*10=174.
+                <LineBreak/>
+                A 2. telephely összpontszáma: S2=2*10+4*5+4*8+2*10+5*8+3*8=156.
+                <LineBreak/>
+                Az additív modell alapján az 1. telephely választását javasoljuk.
+                <LineBreak/>
+                Behelyettesítve a multiplikatív modell formulájába:
+                <LineBreak/>
+                Az 1. telephely összpontszáma: S1=90,02*100,04*60,04*60,02*100,05*100,03=1,534.
+                <LineBreak/>
+                A 2. telephely összpontszáma: S2=100,02*50,04*80,04*100,02*80,05*80,03=1,501.
+                <LineBreak/>
+                Az multiplikatív modell alapján szintén az 1. telephely választását javasoljuk.
+            </TextBlock>
+
+            <Button Content="Close" HorizontalAlignment="Center" Width="100" Margin="5" Click="CloseButton_Click"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>

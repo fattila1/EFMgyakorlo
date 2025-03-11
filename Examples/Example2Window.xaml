@@ -1,0 +1,41 @@
+﻿<Window x:Class="EFM.Examples.Example2Window"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Example 2 - Gravitációs középpont-módszer" Height="600" Width="600">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="10">
+            <TextBlock Text="Gravitációs középpont-módszer - Mintafeladat" FontWeight="Bold" FontSize="16" Margin="0,0,0,10"/>
+
+            <TextBlock TextWrapping="Wrap" FontSize="14">
+                A Vajaskalács nevű pékség új sütőüzem létrehozását tervezi a régióban, ahol jelenleg három mintaboltot működtet.
+                Az új üzem feladata kizárólag ezeknek a mintaboltoknak a kiszolgálása lesz, így az elhelyezéskor elsődleges szempontok között szerepel a távolságokból adódó költségek minimalizálása.
+                <LineBreak/>
+                A pékség termékeiből az A mintabolt átlagosan 1200 db-ot, a B mintabolt 1400 db-ot, a C mintabolt pedig 2500 db-ot értékesít naponta;
+                x,y koordináta-rendszerben való elhelyezkedésüket a következő koordinátákkal határozhatjuk meg:
+                <LineBreak/>
+                A [250,140], B [300,400], C [125,350]
+                <LineBreak/>
+                <LineBreak/>
+                A képletbe helyettesítve:
+                <LineBreak/>
+                Cx = (250*1200 + 300*1400 + 125*2500) / (1200+1400+2500) = 202
+                <LineBreak/>
+                Cy = (140*1200 + 400*1400 + 350*2500) / (1200+1400+2500) = 314
+                <LineBreak/>
+                <LineBreak/>
+                A gravitációs középpont módszere az új üzemnek a [202, 314] koordinátákat jelöli ki.
+            </TextBlock>
+
+            <DataGrid x:Name="ExampleDataGrid" AutoGenerateColumns="False" IsReadOnly="True" Margin="10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Telephely" Binding="{Binding Telephely}" />
+                    <DataGridTextColumn Header="X" Binding="{Binding X}" />
+                    <DataGridTextColumn Header="Y" Binding="{Binding Y}" />
+                    <DataGridTextColumn Header="Súly (db)" Binding="{Binding Suly}" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Content="Close" HorizontalAlignment="Center" Width="100" Click="CloseButton_Click" Margin="10"/>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
